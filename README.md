@@ -95,6 +95,7 @@ Init BannerTime with your custom view:
                 .shownTime(10000)
                 .hiddenTime(10000)
                 .withView(contentView)
+                .setGravity(BannerTime.TOP)
                 .show();
 
 ```
