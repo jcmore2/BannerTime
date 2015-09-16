@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -38,7 +38,7 @@ ext {
     siteUrl = 'https://github.com/jcmore2/bannertime'
     gitUrl = 'https://github.com/jcmore2/bannertime.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.0.0'
 
     developerId = 'jcmore2'
     developerName = 'Juan Carlos Moreno'
