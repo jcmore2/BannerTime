@@ -99,7 +99,7 @@ Init BannerTime with your custom view:
 
 ```
 
-<img src='raw/custom.gif' width='350' height='350' />
+<img src='raw/custom.gif' width='205' height='360' />
 
 
 Pause BannerTime using:
