@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>BannerTime by jcmore2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">BannerTime</h1>
+      <h2 class="project-tagline">BannerTime create a scheduled popup to show your personal message</h2>
+      <a href="https://github.com/jcmore2/BannerTime" class="btn">View on GitHub</a>
+      <a href="https://github.com/jcmore2/BannerTime/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jcmore2/BannerTime/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="bannertime" class="anchor" href="#bannertime" aria-hidden="true"><span class="octicon octicon-link"></span></a>BannerTime</h1>
+
+<p>BannerTime create a scheduled popup to show your personal message</p>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/BannerTime/master/raw/sample.png" width="270" height="400"></p>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/BannerTime/master/raw/bannertime.gif" width="205" height="360"></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add library to your build.gradle:</p>
+
+<div class="highlight highlight-source-java"><pre>
+        compile <span class="pl-s"><span class="pl-pds">'</span>com.jcmore2.bannertime:bannertime:1.0.0<span class="pl-pds">'</span></span>
+</pre></div>
+
+<p>Init BannerTime in your onResume() Activity:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    @<span class="pl-smi">Override</span>
+    <span class="pl-k">protected</span> <span class="pl-k">void</span> onResume() {
+        <span class="pl-v">super</span><span class="pl-k">.</span>onResume();
+            <span class="pl-smi">BannerTime</span><span class="pl-k">.</span>init(<span class="pl-v">this</span>)
+                    .shownTime(<span class="pl-c1">4000</span>)
+                    .hiddenTime(<span class="pl-c1">3000</span>)
+                    .imageBanner(<span class="pl-s"><span class="pl-pds">"</span>http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg<span class="pl-pds">"</span></span>)
+                    .withKOButton()
+                    .withKOButton()
+                    .show();
+    }
+</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/BannerTime/master/raw/default.gif" width="205" height="360"></p>
+
+<p>You can also use a callback:</p>
+
+<div class="highlight highlight-source-java"><pre>
+        <span class="pl-smi">BannerTime</span><span class="pl-k">.</span>init(<span class="pl-v">this</span>)
+                .shownTime(<span class="pl-c1">4000</span>)
+                .hiddenTime(<span class="pl-c1">3000</span>)
+                .imageBanner(<span class="pl-s"><span class="pl-pds">"</span>http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg<span class="pl-pds">"</span></span>)
+                .withKOButton()
+                .withKOButton()
+                .show(<span class="pl-k">new</span> <span class="pl-smi">BannerTime</span>.<span class="pl-smi">BannerTimeListener</span>() {
+                    <span class="pl-k">@Override</span>
+                    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onShow</span>() {
+                        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(mContext, <span class="pl-s"><span class="pl-pds">"</span>onShow<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
+                    }
+
+                    <span class="pl-k">@Override</span>
+                    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onDismiss</span>() {
+                        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(mContext, <span class="pl-s"><span class="pl-pds">"</span>onDismiss<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
+
+                    }
+
+                    <span class="pl-k">@Override</span>
+                    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onClickOk</span>() {
+                        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(mContext, <span class="pl-s"><span class="pl-pds">"</span>onClickOk<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
+
+                    }
+
+                    <span class="pl-k">@Override</span>
+                    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onClickKO</span>() {
+                        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(mContext, <span class="pl-s"><span class="pl-pds">"</span>onClickKO<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
+
+                    }
+
+                    <span class="pl-k">@Override</span>
+                    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onClickImage</span>() {
+                        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(mContext, <span class="pl-s"><span class="pl-pds">"</span>onClickImage<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
+
+                    }
+                });
+</pre></div>
+
+<p>Init BannerTime with your custom view:</p>
+
+<div class="highlight highlight-source-java"><pre>
+       <span class="pl-smi">LayoutInflater</span> layoutInflater <span class="pl-k">=</span> (<span class="pl-smi">LayoutInflater</span>) mContext.
+                getSystemService(<span class="pl-smi">Context</span><span class="pl-c1"><span class="pl-k">.</span>LAYOUT_INFLATER_SERVICE</span>);
+       <span class="pl-smi">View</span> contentView <span class="pl-k">=</span> layoutInflater<span class="pl-k">.</span>inflate(<span class="pl-smi">R</span><span class="pl-k">.</span>layout<span class="pl-k">.</span>custom_banner, <span class="pl-c1">null</span>);
+
+       <span class="pl-smi">BannerTime</span><span class="pl-k">.</span>init(<span class="pl-v">this</span>)
+                .shownTime(<span class="pl-c1">4000</span>)
+                .hiddenTime(<span class="pl-c1">3000</span>)
+                .withView(contentView)
+                .setGravity(<span class="pl-smi">BannerTime</span><span class="pl-c1"><span class="pl-k">.</span>TOP</span>)
+                .show();
+</pre></div>
+
+<p><img src="https://raw.githubusercontent.com/jcmore2/BannerTime/master/raw/custom.gif" width="205" height="360"></p>
+
+<p>Pause BannerTime using:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    @<span class="pl-smi">Override</span>
+    <span class="pl-k">protected</span> <span class="pl-k">void</span> onPause() {
+        <span class="pl-v">super</span><span class="pl-k">.</span>onPause();
+        <span class="pl-smi">BannerTime</span><span class="pl-k">.</span>onPause();
+    }
+
+</pre></div>
+
+<p>You can check the sample App!</p>
+
+<h2>
+<a id="credits--contact" class="anchor" href="#credits--contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits &amp; Contact</h2>
+
+<p>FreeView was created by <a href="mailto:jcmore2@gmail.com">jcmore2@gmail.com</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>BannerTime is available under the Apache License, Version 2.0.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jcmore2/BannerTime">BannerTime</a> is maintained by <a href="https://github.com/jcmore2">jcmore2</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
