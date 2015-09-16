@@ -26,8 +26,8 @@ Init BannerTime in your onResume() Activity:
     protected void onResume() {
         super.onResume();
             BannerTime.init(this)
-                    .shownTime(10000)
-                    .hiddenTime(10000)
+                    .shownTime(4000)
+                    .hiddenTime(3000)
                     .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg")
                     .withKOButton()
                     .withKOButton()
@@ -44,8 +44,8 @@ You can also use a callback:
 ```java
 
         BannerTime.init(this)
-                .shownTime(10000)
-                .hiddenTime(10000)
+                .shownTime(4000)
+                .hiddenTime(3000)
                 .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg")
                 .withKOButton()
                 .withKOButton()
@@ -92,8 +92,8 @@ Init BannerTime with your custom view:
        View contentView = layoutInflater.inflate(R.layout.custom_banner, null);
 
        BannerTime.init(this)
-                .shownTime(10000)
-                .hiddenTime(10000)
+                .shownTime(4000)
+                .hiddenTime(3000)
                 .withView(contentView)
                 .setGravity(BannerTime.TOP)
                 .show();
