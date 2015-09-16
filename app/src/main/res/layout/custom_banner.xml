@@ -3,7 +3,7 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/darker_gray"
+    android:background="@color/main"
     android:orientation="vertical">
 
     <LinearLayout
@@ -48,11 +48,11 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/black"
+            android:background="@color/fav"
             android:gravity="center"
             android:padding="5dp"
             android:text="Fav"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="15sp"
             android:visibility="visible" />
 
@@ -63,7 +63,7 @@
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@android:color/white"
+            android:background="@color/rt"
             android:gravity="center"
             android:padding="5dp"
             android:text="Retweet"

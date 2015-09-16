@@ -2,9 +2,12 @@
 <resources>
 
 
-    <color name="main">#71C894</color>
-    <color name="custom">#ff0099cc</color>
-    <color name="def">#FF5D5E</color>
+    <color name="main">#AED581</color>
+    <color name="custom">#4DD0E1</color>
+    <color name="def">#E57373</color>
+
+    <color name="fav">#FFEE58</color>
+    <color name="rt">#0277BD</color>
 
 
 </resources>

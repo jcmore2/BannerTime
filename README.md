@@ -5,6 +5,8 @@ BannerTime create a scheduled popup to show your personal message
 
 <img src='raw/sample.png' width='270' height='480' />
 
+<img src='raw/bannertime.gif' width='205' height='360' />
+
 Usage
 -----
 
@@ -16,21 +18,25 @@ Add library to your build.gradle:
 
 ```
 
-Init BannerTime:
+Init BannerTime in your onResume() Activity:
 
 ```java
 
+    @Override
+    protected void onResume() {
+        super.onResume();
             BannerTime.init(this)
                     .shownTime(10000)
                     .hiddenTime(10000)
-                    .imageBanner("https://bookish101.files.wordpress.com/2013/06/hello.gif")
-                    .withOKBackgroundColorAndText(android.R.color.white, "-OK-")
-                    .withKOBackgroundColorAndText(android.R.color.black, "-KO-")
+                    .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg")
+                    .withKOButton()
+                    .withKOButton()
                     .show();
+    }
 
 ```
 
-<img src='raw/sample1.gif' width='350' height='350' />
+<img src='raw/default.gif' width='205' height='360' />
 
 
 You can also use a callback:
@@ -40,9 +46,9 @@ You can also use a callback:
         BannerTime.init(this)
                 .shownTime(10000)
                 .hiddenTime(10000)
-                .imageBanner("https://bookish101.files.wordpress.com/2013/06/hello.gif")
-                .withOKBackgroundColorAndText(android.R.color.white, "-OK-")
-                .withKOBackgroundColorAndText(android.R.color.black, "-KO-")
+                .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg")
+                .withKOButton()
+                .withKOButton()
                 .show(new BannerTime.BannerTimeListener() {
                     @Override
                     public void onShow() {
@@ -93,6 +99,9 @@ Init BannerTime with your custom view:
 
 ```
 
+<img src='raw/custom.gif' width='350' height='350' />
+
+
 Pause BannerTime using:
 
 ```java
@@ -102,21 +111,6 @@ Pause BannerTime using:
         super.onPause();
         BannerTime.onPause();
     }
-
-
-```
-
-Resume BannerTime using:
-
-```java
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        BannerTime.onResume();
-
-    }
-
 
 
 ```

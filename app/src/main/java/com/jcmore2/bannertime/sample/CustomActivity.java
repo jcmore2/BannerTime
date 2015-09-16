@@ -33,6 +33,11 @@ public class CustomActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_custom);
 
+
+    }
+
+    private void createBanner(){
+
         LayoutInflater layoutInflater = (LayoutInflater) mContext.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentView = layoutInflater.inflate(R.layout.custom_banner, null);
@@ -69,9 +74,9 @@ public class CustomActivity extends AppCompatActivity {
                 .into(rt);
 
         BannerTime.init(this)
-                .shownTime(10000)
-                .hiddenTime(10000)
-                .setGravity(BannerTime.RIGHT)
+                .shownTime(4000)
+                .hiddenTime(3000)
+                .setGravity(BannerTime.TOP)
                 .withView(contentView)
                 .show();
     }
@@ -79,8 +84,7 @@ public class CustomActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        BannerTime.onResume();
-
+        createBanner();
     }
 
     @Override

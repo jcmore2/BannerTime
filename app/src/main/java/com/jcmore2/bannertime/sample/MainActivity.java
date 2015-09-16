@@ -21,32 +21,54 @@ public class MainActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.custom).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomActivity.launch(mContext);
-            }
-        });
-
-        findViewById(R.id.def).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DefActivity.launch(mContext);
-            }
-        });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        BannerTime.init(this)
+                .shownTime(5000)
+                .hiddenTime(3000)
+                .imageBanner("http://campbellriver.whatsondigest.com/sites/default/files/event_photographs/Try%20it%20.png", false)
+                .withOKButton(R.color.def, "Default", android.R.color.white)
+                .withKOButton(R.color._ok_bg, "Custom", android.R.color.white)
+                .background(R.color.fav)
+                .imageBannerPlaceholder(0)
+                .show(new BannerTime.BannerTimeListener() {
+                    @Override
+                    public void onShow() {
+                    }
 
-    }
+                    @Override
+                    public void onDismiss() {
+
+                    }
+
+                    @Override
+                    public void onClickOk() {
+                        DefActivity.launch(mContext);
+                    }
+
+                    @Override
+                    public void onClickKO() {
+                        CustomActivity.launch(mContext);
+                    }
+
+                    @Override
+                    public void onClickImage() {
+                        Toast.makeText(mContext, "onClickImage", Toast.LENGTH_SHORT).show();
+
+                    }
+                });    }
 
     @Override
     protected void onPause() {
+
         super.onPause();
+        BannerTime.onPause();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

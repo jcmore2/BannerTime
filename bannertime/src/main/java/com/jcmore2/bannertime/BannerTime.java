@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,7 +50,6 @@ public class BannerTime {
 
     private static BannerTime sInstance;
     private static Context mContext;
-    private static boolean isPaused;
 
     private static long SHOW_TIME_BANNER;
     private static long HIDE_TIME_BANNER;
@@ -59,7 +59,7 @@ public class BannerTime {
     private static TimerTask timerTaskHide;
     private static RequestCreator requestCreator;
 
-    //private static Dialog dialog;
+    private static Dialog dialog;
     private static BannerTimeListener mListener;
     private static View mView;
     private static View contentView;
@@ -107,9 +107,8 @@ public class BannerTime {
     private BannerTime(Context context) {
         try {
             if (context == null) {
-                Log.e(TAG, "Cant init, context must not be null");
-            } else {
-                mContext = context;
+                throw new IllegalStateException(
+                        "Cant init, context must not be null");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,14 +141,32 @@ public class BannerTime {
 
 
     /**
-     * Set ImageBanner
+     * Set Background
      *
      * @param resourceId
      * @return
      */
-    public static BannerTime imageBanner(int resourceId) {
+    public static BannerTime background(int resourceId) {
+
+        mView.findViewById(R.id.parent).setBackgroundResource(resourceId);
+        return sInstance;
+    }
+
+
+    /**
+     * Set ImageBanner
+     *
+     * @param resourceId
+     * @param crop
+     * @return
+     */
+    public static BannerTime imageBanner(int resourceId, boolean crop) {
 
         requestCreator = Picasso.with(mContext).load(resourceId);
+        if (crop)
+            requestCreator.fit().centerCrop();
+        else
+            requestCreator.fit().centerInside();
         return sInstance;
     }
 
@@ -157,12 +174,16 @@ public class BannerTime {
      * Set ImageBanner
      *
      * @param file
+     * @param crop
      * @return
      */
-    public static BannerTime imageBanner(File file) {
+    public static BannerTime imageBanner(File file, boolean crop) {
 
         requestCreator = Picasso.with(mContext).load(file);
-
+        if (crop)
+            requestCreator.fit().centerCrop();
+        else
+            requestCreator.fit().centerInside();
         return sInstance;
     }
 
@@ -170,12 +191,16 @@ public class BannerTime {
      * Set ImageBanner
      *
      * @param path
+     * @param crop
      * @return
      */
-    public static BannerTime imageBanner(String path) {
+    public static BannerTime imageBanner(String path, boolean crop) {
 
         requestCreator = Picasso.with(mContext).load(path);
-
+        if (crop)
+            requestCreator.fit().centerCrop();
+        else
+            requestCreator.fit().centerInside();
         return sInstance;
     }
 
@@ -183,11 +208,16 @@ public class BannerTime {
      * Set ImageBanner
      *
      * @param uri
+     * @param crop
      * @return
      */
-    public static BannerTime imageBanner(Uri uri) {
+    public static BannerTime imageBanner(Uri uri, boolean crop) {
 
         requestCreator = Picasso.with(mContext).load(uri);
+        if (crop)
+            requestCreator.fit().centerCrop();
+        else
+            requestCreator.fit().centerInside();
         return sInstance;
     }
 
@@ -204,64 +234,63 @@ public class BannerTime {
     }
 
     /**
-     * Enable OK button with background color
+     * Enable OK button
      *
-     * @param color
      * @return
      */
-    public static BannerTime withOKBackgroundColorAndText(int color, String text) {
+    public static BannerTime withOKButton() {
+
+        okVisibility = View.VISIBLE;
+        return sInstance;
+    }
+
+    /**
+     * Enable OK button with custom values
+     *
+     * @param bgResource Background button
+     * @param text       Button text
+     * @param textColor  Button text color
+     * @return
+     */
+    public static BannerTime withOKButton(int bgResource, String text, int textColor) {
 
         Button ok = (Button) mView.findViewById(R.id.btnOk);
         okVisibility = View.VISIBLE;
         ok.setText(text);
-        ok.setBackgroundColor(mContext.getResources().getColor(color));
+        ok.setTextColor(mContext.getResources().getColor(textColor));
+        ok.setBackgroundResource(bgResource);
         return sInstance;
     }
 
     /**
-     * Enable OK button with background resource
+     * Enable KO button
      *
-     * @param resource
      * @return
      */
-    public static BannerTime withOKBackgroundResourceAndText(int resource, String text) {
+    public static BannerTime withKOButton() {
 
-        Button ok = (Button) mView.findViewById(R.id.btnOk);
-        okVisibility = View.VISIBLE;
-        ok.setText(text);
-        ok.setBackgroundResource(resource);
+        koVisibility = View.VISIBLE;
         return sInstance;
     }
 
     /**
-     * Enable KO button with background color
+     * Enable KO button with custom values
      *
-     * @param color
+     * @param bgResource Background button
+     * @param text       Button text
+     * @param textColor  Button text color
      * @return
      */
-    public static BannerTime withKOBackgroundColorAndText(int color, String text) {
+    public static BannerTime withKOButton(int bgResource, String text, int textColor) {
 
         Button ko = (Button) mView.findViewById(R.id.btnKO);
         koVisibility = View.VISIBLE;
         ko.setText(text);
-        ko.setBackgroundColor(mContext.getResources().getColor(color));
+        ko.setTextColor(mContext.getResources().getColor(textColor));
+        ko.setBackgroundResource(bgResource);
         return sInstance;
     }
 
-    /**
-     * Enable KO button with background resource
-     *
-     * @param resource
-     * @return
-     */
-    public static BannerTime withKOBackgroundResourceAndText(int resource, String text) {
-
-        Button ko = (Button) mView.findViewById(R.id.btnKO);
-        koVisibility = View.VISIBLE;
-        ko.setText(text);
-        ko.setBackgroundResource(resource);
-        return sInstance;
-    }
 
     /**
      * Set Show time in milliseconds
@@ -296,6 +325,19 @@ public class BannerTime {
     }
 
     /**
+     * Set the height of the Banner
+     *
+     * @param height The desired BannerTime height.
+     */
+    public static BannerTime setHeight(int height) {
+
+        ImageView img = (ImageView) mView.findViewById(R.id.imageAd);
+        img.getLayoutParams().height = height;
+        img.requestLayout();
+        return sInstance;
+    }
+
+    /**
      * Show banner
      */
     public static void show() {
@@ -316,10 +358,12 @@ public class BannerTime {
 
         ImageView img = (ImageView) mView.findViewById(R.id.imageAd);
         if (requestCreator != null) {
-            requestCreator
-                    .fit().centerCrop()
-                    .placeholder(mPlaceHolder)
-                    .into(img);
+            if (mPlaceHolder != 0) {
+                requestCreator.placeholder(mPlaceHolder)
+                        .into(img);
+            } else {
+                requestCreator.into(img);
+            }
         } else {
             Picasso.with(mContext)
                     .load(mPlaceHolder)
@@ -336,6 +380,7 @@ public class BannerTime {
      */
     private static void init() {
 
+        dialog = null;
         contentView = null;
         requestCreator = null;
         mGravity = BannerTime.BOTTOM;
@@ -344,7 +389,6 @@ public class BannerTime {
         mPlaceHolder = R.drawable.loading;
         okVisibility = View.GONE;
         koVisibility = View.GONE;
-        isPaused = false;
 
         SHOW_TIME_BANNER = 10000;
         HIDE_TIME_BANNER = 2 * 60000;
@@ -358,7 +402,6 @@ public class BannerTime {
      */
     private static void createDialog() {
 
-        final Dialog dialog;
         if (mGravity == BannerTime.BOTTOM) {
             dialog = new Dialog(mContext, R.style.DialogSlideAnimBottom);
         } else if (mGravity == BannerTime.TOP) {
@@ -424,19 +467,7 @@ public class BannerTime {
      */
     private static void scheduleShowBanner(final Dialog dialog) {
 
-        ((Activity) mContext).runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                if (!((Activity) mContext).isFinishing()) {
-                    dialog.show();
-                    if (mListener != null)
-                        mListener.onShow();
-                }
-                Log.i(TAG, "showBanner");
-            }
-        });
+        showDialog(dialog);
 
         timerTaskShow = new TimerTask() {
 
@@ -454,6 +485,38 @@ public class BannerTime {
      */
     private static void scheduleHideBanner(final Dialog dialog) {
 
+        dismissDialog(dialog);
+
+        timerTaskHide = new TimerTask() {
+
+            @Override
+            public void run() {
+                scheduleShowBanner(dialog);
+            }
+        };
+
+        timerHide.schedule(timerTaskHide, HIDE_TIME_BANNER);
+    }
+
+    private static void showDialog(final Dialog dialog){
+
+        ((Activity) mContext).runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                if (!((Activity) mContext).isFinishing()) {
+                    dialog.show();
+                    if (mListener != null)
+                        mListener.onShow();
+                }
+                Log.i(TAG, "showBanner");
+            }
+        });
+    }
+
+    private static void dismissDialog(final Dialog dialog){
+
         ((Activity) mContext).runOnUiThread(new Runnable() {
 
             @Override
@@ -467,16 +530,6 @@ public class BannerTime {
                 Log.i(TAG, "hideBanner");
             }
         });
-
-        timerTaskHide = new TimerTask() {
-
-            @Override
-            public void run() {
-                scheduleShowBanner(dialog);
-            }
-        };
-
-        timerHide.schedule(timerTaskHide, HIDE_TIME_BANNER);
     }
 
     /**
@@ -485,30 +538,17 @@ public class BannerTime {
     public static void onPause() {
         Log.i(TAG, "Banner onPause");
 
+        dismissDialog(dialog);
+
         if (timerTaskHide != null)
             timerTaskHide.cancel();
         if (timerTaskShow != null)
             timerTaskShow.cancel();
 
-        isPaused = true;
-
         Log.i(TAG, "Banner canceled");
 
     }
 
-    /**
-     * Call on Resume to start Banner
-     */
-    public static void onResume() {
-        Log.i(TAG, "Banner onResume");
-
-        if (isPaused) {
-            Log.i(TAG, "Banner Run");
-            timerTaskHide.run();
-            isPaused = false;
-        }
-
-    }
 
     public interface BannerTimeListener {
         void onShow();

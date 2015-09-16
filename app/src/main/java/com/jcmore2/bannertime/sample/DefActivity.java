@@ -28,13 +28,17 @@ public class DefActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_def);
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         BannerTime.init(this)
-                .shownTime(10000)
-                .hiddenTime(10000)
-                .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg")
-                .withOKBackgroundColorAndText(android.R.color.white, "-OK-")
-                .withKOBackgroundColorAndText(android.R.color.black, "-KO-")
+                .shownTime(4000)
+                .hiddenTime(3000)
+                .imageBanner("http://pre03.deviantart.net/2aa0/th/pre/f/2012/321/d/1/african_landscape_by_dasflon-d5l9t7c.jpg", true)
+                .withOKButton()
+                .withKOButton()
                 .show(new BannerTime.BannerTimeListener() {
                     @Override
                     public void onShow() {
@@ -68,17 +72,11 @@ public class DefActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        BannerTime.onResume();
-
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         BannerTime.onPause();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
