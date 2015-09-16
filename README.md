@@ -3,7 +3,7 @@ BannerTime
 
 BannerTime create a scheduled popup to show your personal message
 
-<img src='raw/sample.png' width='270' height='480' />
+<img src='raw/sample.png' width='270' height='400' />
 
 <img src='raw/bannertime.gif' width='205' height='360' />
 
