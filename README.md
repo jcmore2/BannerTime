@@ -119,6 +119,11 @@ Pause BannerTime using:
 
 You can check the sample App!
 
+ Libraries Used
+-----------------
+
+[Picasso by Square](http://square.github.io/picasso/)
+
 Credits & Contact
 -----------------
 
