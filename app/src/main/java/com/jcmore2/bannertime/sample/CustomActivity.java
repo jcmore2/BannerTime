@@ -76,6 +76,7 @@ public class CustomActivity extends AppCompatActivity {
         BannerTime.init(this)
                 .shownTime(4000)
                 .hiddenTime(3000)
+                .setTouchOverlay(true)
                 .setGravity(BannerTime.TOP)
                 .withView(contentView)
                 .show();

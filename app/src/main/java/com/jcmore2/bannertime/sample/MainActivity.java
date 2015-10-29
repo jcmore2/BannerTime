@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(mContext, "onClickImage", Toast.LENGTH_SHORT).show();
 
                     }
-                });    }
+                });
+    }
 
     @Override
     protected void onPause() {

@@ -7,7 +7,7 @@
 
     <style name="DialogSlideAnimBottom" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimationBottom</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowBackground">@color/_transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -19,7 +19,7 @@
 
     <style name="DialogSlideAnimLeft" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimationLeft</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowBackground">@color/_transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -31,7 +31,7 @@
 
     <style name="DialogSlideAnimRight" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimationRight</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowBackground">@color/_transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -43,7 +43,7 @@
 
     <style name="DialogSlideAnimTop" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimationTop</item>
-        <item name="android:windowBackground">@null</item>
+        <item name="android:windowBackground">@color/_transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
     </style>

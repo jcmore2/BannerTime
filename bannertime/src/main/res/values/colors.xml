@@ -4,5 +4,6 @@
     <color name="_ko_bg">#FF5722</color>
     <color name="_ok_bg">#29B6F6</color>
     <color name="_bg">#ECEFF1</color>
+    <color name="_transparent">#00000000</color>
 
 </resources>
