@@ -14,7 +14,7 @@ Add library to your build.gradle:
 
 ```java
 
-	    compile 'com.jcmore2.bannertime:bannertime:1.0.1'
+	    compile 'com.jcmore2.bannertime:bannertime:1.1.0'
 
 ```
 
