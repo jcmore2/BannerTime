@@ -3,6 +3,7 @@ package com.jcmore2.bannertime.sample;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
         BannerTime.init(this)
                 .shownTime(5000)
                 .hiddenTime(3000)

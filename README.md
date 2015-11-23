@@ -14,8 +14,19 @@ Add library to your build.gradle:
 
 ```java
 
-	    compile 'com.jcmore2.bannertime:bannertime:1.1.0'
+	    compile 'com.jcmore2.bannertime:bannertime:1.1.1'
 
+```
+
+If you don´t want to use Picasso Library
+(You may notice that you are not be able to use "imageBanner()" and "imageBannerPlaceholder()" methods):
+
+```java
+
+    compile ('com.jcmore2.bannertime:bannertime:1.1.1') {
+        exclude module: 'picasso'
+    }
+    
 ```
 
 Init BannerTime in your onResume() Activity:
